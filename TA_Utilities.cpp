@@ -74,7 +74,7 @@ namespace TA_Utilities
       // Free memory and return
       delete(temperatures);
       return;
-  } // end "void select_coldest_GPU()""
+  } // end "void select_coldest_GPU()"
 
   /* Create a child thread that will kill the parent thread after the
      specified time limit has been exceeded */
@@ -87,7 +87,7 @@ namespace TA_Utilities
       // If it hasn't already terminated.
       if(child_id == 0) // "I am the child thread"
       {
-      sleep(time_limit);
+          sleep(time_limit);
           if( kill(parent_id, SIGTERM) == 0) {
               printf("enforce_time_limit.c: Program terminated"
                " for taking longer than %d seconds\n", time_limit);
