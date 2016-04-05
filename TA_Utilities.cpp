@@ -26,7 +26,8 @@ namespace TA_Utilities
       // Get the number of GPUs on this machine
       int num_devices;
       cudaGetDeviceCount(&num_devices);
-      if(num_devices == 1) {
+      if(num_devices == 0) {
+          printf("Error: No GPU detected\n");
           return;
       }
       // Read GPU info into buffer "output"
