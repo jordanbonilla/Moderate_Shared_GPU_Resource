@@ -13,7 +13,6 @@
 #include <unistd.h> // sleep, fork, getpid
 #include <signal.h> // kill
 #include <cstdio> // printf
-#include <cstring> // memcpy
 #include <stdlib.h> // popen, pclose, atoi, fread
 #include <cuda_runtime.h> // cudaGetDeviceCount, cudaSetDevice
 
@@ -27,12 +26,11 @@ namespace TA_Utilities
       int num_devices;
       cudaGetDeviceCount(&num_devices);
       if(num_devices == 0) {
-          printf("Error: No GPU detected\n");
+          printf("select_coldest_GPU: Error - No GPU detected\n");
           return;
       }
       // Read GPU info into buffer "output"
       const unsigned int MAX_BYTES = 10000;
-      const unsigned int MAX_DIGITS_PER_INT = 10;
       char output[MAX_BYTES];
       FILE *fp = popen("nvidia-smi &> /dev/null", "r");
       fread(output, sizeof(char), MAX_BYTES, fp);
@@ -49,8 +47,13 @@ namespace TA_Utilities
                   ++i;
               }
               unsigned int temp_end = i;
-              char this_temperature[MAX_DIGITS_PER_INT];
-              memcpy(this_temperature, output + temp_begin, temp_end);
+              char this_temperature[32];
+              // Read in the characters cooresponding to this temperature
+              for(int j = 0; j < temp_end - temp_begin; ++j) {
+                  this_temperature[j] = output[temp_begin + j];
+              }
+              this_temperature[temp_end - temp_begin + 1] = '\0';
+              // Convert string representation to int
               temperatures[num_temps_parsed] = atoi(this_temperature);
               num_temps_parsed++;
           }
@@ -74,7 +77,7 @@ namespace TA_Utilities
       // Free memory and return
       delete(temperatures);
       return;
-  } // end "void select_coldest_GPU()"
+  } // end "void select_coldest_GPU()""
 
   /* Create a child thread that will kill the parent thread after the
      specified time limit has been exceeded */
