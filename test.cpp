@@ -20,6 +20,7 @@
 //--------------------------------------------------------------------------\
 
 #include "TA_Utilities.hpp"
+#include <unistd.h>
 int main() {
     // These functions allow you to select the least utilized GPU 
     // on your system as well as enforce a time limit on program execution.
@@ -30,5 +31,6 @@ int main() {
     int max_time_allowed_in_seconds = 10;
     TA_Utilities::enforce_time_limit(max_time_allowed_in_seconds);
     // Your code...
+    sleep(11);
     return 0;
 }
