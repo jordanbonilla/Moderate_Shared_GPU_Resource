@@ -1,7 +1,7 @@
 #Project: 
 Allow a shared computer to run smoothly when it is being used by students in a CUDA GPU programming course.
 
-TA_Utilities.cpp/hpp provide function that programatically limit the execution time of the function and select the GPU with the lowest temperature to use for kernel calls.
+TA_Utilities.cpp/hpp provide functions that programatically limit the execution time of the function and select the GPU with the lowest temperature to use for kernel calls.
 
 #Prerequisites: 
 Must be running on a UNIX machine
