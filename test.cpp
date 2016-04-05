@@ -20,7 +20,7 @@
 //--------------------------------------------------------------------------\
 
 #include "TA_Utilities.hpp"
-#include <unistd.h>
+#include <unistd.h> // sleep
 int main() {
     // These functions allow you to select the least utilized GPU 
     // on your system as well as enforce a time limit on program execution.
