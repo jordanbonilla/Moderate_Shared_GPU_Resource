@@ -119,12 +119,10 @@ namespace TA_Utilities
           gpuErrchk( cudaSetDevice(i) );
           // Read in available memory on this GPU
           gpuErrchk( cudaMemGetInfo(&free_memory, &total_memory) );
-          // printf("free: %f, total: %f\n", (float)free_memory  * GB_PER_B, (float)total_memory  * GB_PER_B);
           // Write utilization to array
           total_memory_capacities[i] = (double)total_memory * GB_PER_B;
           current_memory_useages[i] = (double)(total_memory - free_memory) * GB_PER_B;
           memory_ratios[i] = current_memory_useages[i] / total_memory_capacities[i];
-          printf("total: %f, used: %f, ratio: %f\n", total_memory_capacities[i], current_memory_useages[i], memory_ratios[i]);
       }
 
       // Assign an overall utilization score to each GPU as:
