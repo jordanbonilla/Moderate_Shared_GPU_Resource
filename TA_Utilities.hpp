@@ -5,7 +5,9 @@
 //
 // TA_Utilities.cpp/hpp provide functions that programatically limit
 // the execution time of the function and select the GPU with the 
-// lowest temperature to use for kernel calls.
+// lowest utilization for kernel calls. Utilization is determined by
+// finding each GPU's temperature and memory usage and creating a 
+// "utilization score" that weighs these two factors equally.
 //--------------------------------------------------------------------------
 
 #pragma once
@@ -16,7 +18,7 @@ namespace TA_Utilities
        specified time limit has been exceeded. UNIX only */
     void enforce_time_limit(int time_limit);
     /* Select the least utilized GPU on this system. Estimate
-       GPU utilization using GPU temperature. UNIX only. */
-    void select_coldest_GPU();
+       GPU utilization using GPU temperature and memory usage. UNIX only. */
+    void select_least_utilized_GPU();
 
 }
