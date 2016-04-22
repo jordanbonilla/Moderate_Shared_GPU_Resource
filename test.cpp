@@ -27,7 +27,7 @@ int main() {
     // Please leave these enabled as a courtesy to your fellow classmates
     // that are sharing this computer. You may ignore or remove these 
     // functions if you are running on your local machine.
-    TA_Utilities::select_coldest_GPU();
+    TA_Utilities::select_least_utilized_GPU();
     int max_time_allowed_in_seconds = 10;
     TA_Utilities::enforce_time_limit(max_time_allowed_in_seconds);
     // Your code...
